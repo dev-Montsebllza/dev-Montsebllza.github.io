@@ -1,16 +1,23 @@
-<!-- Generated with Claude -->
-
-<!doctype html>
+```html
+<!doctypes html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Data Scientist Portfolio - Montse Balleza</title>
+
+    <!-- Luxury editorial font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       /* ============================================================
-       BASIC STYLES — students can tweak colors/fonts here
-       ============================================================ */
+         LUXURY / EDITORIAL COLOR PALETTE
+         ============================================================ */
+
       * {
         box-sizing: border-box;
         margin: 0;
@@ -18,128 +25,173 @@
       }
 
       body {
-        font-family: Arial, Helvetica, sans-serif;
-        color: #2d2438;
-        background: #f8f5fb;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        color: #b9dff2;
+        background: #071a2b;
         line-height: 1.5;
       }
 
+      /* ---------- MAIN CONTAINER ---------- */
+
       .container {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 60px 30px;
       }
 
-      /* ---------- HEADER (photo + name + subheading) ---------- */
+      /* ---------- HEADER ---------- */
+
       header {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 45px;
       }
 
-      /* Empty space for photo — replace with your own <img> if you like */
       .photo {
         width: 140px;
         height: 140px;
         border-radius: 50%;
-        background: #ddd;
-        border: 2px dashed #aaa;
-        margin: 0 auto 16px;
+        background: #102d44;
+        border: 1px solid #7fb6d5;
+        margin: 0 auto 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #888;
+        color: #9bcde6;
         font-size: 13px;
       }
 
       header h1 {
-        font-size: 28px;
-        margin-bottom: 6px;
-      } /* NAME */
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 46px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        color: #c7e8f7;
+      }
+
       header p {
-        font-size: 16px;
-        color: #555;
-      } /* EXPERIENCES */
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #8fc5df;
+      }
 
       /* ---------- TABS ---------- */
+
       .tabs {
         display: flex;
         justify-content: center;
-        gap: 10px;
-        margin-bottom: 24px;
+        gap: 14px;
+        margin-bottom: 30px;
       }
 
       .tab-button {
-        padding: 10px 22px;
-        border: 1px solid #ccc;
-        background: #fff;
+        padding: 11px 28px;
+        border: 1px solid #467995;
+        background: transparent;
+        color: #9bcde6;
         cursor: pointer;
-        font-size: 15px;
-        border-radius: 4px;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border-radius: 0;
+      }
+
+      .tab-button:hover {
+        background: #102d44;
       }
 
       .tab-button.active {
-        background: #2c3e50;
-        color: #fff;
-        border-color: #2c3e50;
+        background: #9bcde6;
+        color: #071a2b;
+        border-color: #9bcde6;
       }
 
       /* ---------- TAB CONTENT ---------- */
+
       .tab-content {
         display: none;
       }
+
       .tab-content.active {
         display: block;
       }
 
       .panel {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 6px;
-        padding: 24px;
+        background: #0b2236;
+        border: 1px solid #244860;
+        padding: 35px;
+        border-radius: 0;
       }
 
-      /* ---------- PROJECT CARDS (1 x 3 grid) ---------- */
+      .panel p {
+        font-size: 16px;
+        line-height: 1.9;
+        color: #b9dff2;
+      }
+
+      /* ---------- PROJECT CARDS ---------- */
+
       .cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 20px;
       }
 
       .card {
-        border: 1px solid #eee;
-        border-radius: 6px;
+        border: 1px solid #244860;
         overflow: hidden;
-        background: #fff;
+        background: #0b2236;
+        border-radius: 0;
+        transition: transform 0.3s ease, border-color 0.3s ease;
       }
 
-      /* Empty space for project photo */
+      .card:hover {
+        transform: translateY(-5px);
+        border-color: #8fc5df;
+      }
+
       .card-photo {
-        height: 120px;
-        background: #ddd;
-        border-bottom: 1px dashed #aaa;
+        height: 150px;
+        background: #102d44;
+        border-bottom: 1px solid #244860;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #888;
+        color: #719db5;
         font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
 
       .card-text {
-        padding: 14px;
-      }
-      .card-text h3 {
-        font-size: 16px;
-        margin-bottom: 6px;
-      }
-      .card-text p {
-        font-size: 14px;
-        color: #555;
+        padding: 22px;
       }
 
-      /* ---------- MOBILE: stack cards vertically ---------- */
+      .card-text h3 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        color: #c7e8f7;
+      }
+
+      .card-text p {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #8fc5df;
+      }
+
+      /* ---------- MOBILE ---------- */
+
       @media (max-width: 640px) {
         .cards {
           grid-template-columns: 1fr;
+        }
+
+        header h1 {
+          font-size: 36px;
         }
       }
     </style>
@@ -147,88 +199,130 @@
 
   <body>
     <div class="container">
+
       <!-- ============================================================
-         HEADER: photo, name, experiences
-         ============================================================ -->
+           HEADER: photo, name, experience
+           ============================================================ -->
+
       <header>
-        <!-- Replace this div with <img src="your-photo.jpg" class="photo"> -->
         <div class="photo">Photo</div>
 
         <h1>Montse Balleza</h1>
-        <p>Data Analyst · RStudio · Python · SQL · Tableau · Power BI · DataBricks · </p>
+
+        <p>
+          Data Analyst · RStudio · Python · SQL · Tableau · Power BI · DataBricks
+        </p>
       </header>
 
       <!-- ============================================================
-         TABS
-         ============================================================ -->
+           TABS
+           ============================================================ -->
+
       <div class="tabs">
         <button class="tab-button active" onclick="showTab('about')">
           About Me
         </button>
+
         <button class="tab-button" onclick="showTab('projects')">
           Projects
         </button>
       </div>
 
       <!-- ---------- TAB 1: ABOUT ME ---------- -->
+
       <div id="about" class="tab-content active">
         <div class="panel">
           <p>
-            Hi! Im a Data analyst of 5+ Years. I'm experienced in data analysis, visualization, and business intelligence, +1 year of developer experience. I have a strong background in RStudio, Python, SQL, Tableau, Power BI, and DataBricks. I enjoy turning complex data into actionable insights and helping businesses make data-driven decisions. My business interests are FMCG, Retail, Fashion, luxury, and Social Media Analytics.
+            Hi! I'm a Data Analyst with 5+ years of experience in data analysis,
+            visualization, and business intelligence, along with 1+ year of
+            developer experience. I have a strong background in RStudio, Python,
+            SQL, Tableau, Power BI, and DataBricks. I enjoy turning complex data
+            into actionable insights and helping businesses make data-driven
+            decisions. My business interests include FMCG, Retail, Fashion,
+            Luxury, and Social Media Analytics.
           </p>
         </div>
       </div>
 
       <!-- ---------- TAB 2: PROJECTS ---------- -->
+
       <div id="projects" class="tab-content">
+
         <div class="cards">
+
           <!-- CARD 1 -->
+
           <div class="card">
             <div class="card-photo">Project Image</div>
+
             <div class="card-text">
               <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+
+              <p>
+                Short description of what you did and the tools you used.
+              </p>
             </div>
           </div>
 
           <!-- CARD 2 -->
+
           <div class="card">
             <div class="card-photo">Project Image</div>
+
             <div class="card-text">
               <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+
+              <p>
+                Short description of what you did and the tools you used.
+              </p>
             </div>
           </div>
 
           <!-- CARD 3 -->
+
           <div class="card">
             <div class="card-photo">Project Image</div>
+
             <div class="card-text">
               <h3>Project Title</h3>
-              <p>Short description of what you did and the tools you used.</p>
+
+              <p>
+                Short description of what you did and the tools you used.
+              </p>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
 
     <!-- ============================================================
-       SIMPLE TAB SWITCHING SCRIPT
-       ============================================================ -->
+         SIMPLE TAB SWITCHING SCRIPT
+         ============================================================ -->
+
     <script>
       function showTab(id) {
-        // hide all tab contents
+
+        // Hide all tab contents
         document.querySelectorAll(".tab-content").forEach(function (el) {
           el.classList.remove("active");
         });
-        // remove active state from all buttons
+
+        // Remove active state from all buttons
         document.querySelectorAll(".tab-button").forEach(function (btn) {
           btn.classList.remove("active");
         });
-        // show the selected tab + highlight the clicked button
+
+        // Show the selected tab
         document.getElementById(id).classList.add("active");
+
+        // Highlight the clicked button
         event.target.classList.add("active");
       }
     </script>
+
   </body>
 </html>
+```
+
