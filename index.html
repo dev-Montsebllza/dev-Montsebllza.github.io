@@ -1,77 +1,1874 @@
-import { useState, useRef } from "react";
-import { Layout } from "@/components/Layout";
-import { projects } from "@/data/projects";
+# `index.html` — City at Night Portfolio - Montsebllza
 
-const Index = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  // Get 8 unique cover images from projects for the grid (4x2)
-  const gridImages = projects.slice(0, 8).map(p => p.coverImage);
+  <title>Montserrat Balleza | Data Scientist</title>
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    
-    const rect = containerRef.current.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    // Calculate offset from center (normalized to -1 to 1)
-    const x = (e.clientX - rect.left - centerX) / centerX;
-    const y = (e.clientY - rect.top - centerY) / centerY;
-    
-    setMousePosition({ x, y });
-  };
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  return (
-    <Layout hideFooter noPadding>
-      <section 
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        className="relative h-screen overflow-hidden"
-      >
-        {/* Image Grid Background with Parallax - 4 columns x 2 rows */}
-        <div 
-          className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-out"
-          style={{
-            transform: `translate(${-mousePosition.x * 40}px, ${-mousePosition.y * 40}px)`,
-          }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 p-12 md:p-16 w-full max-w-7xl">
-            {gridImages.map((image, index) => (
-              <div 
-                key={index}
-                className="aspect-[3/4] overflow-hidden"
-              >
-                <img
-                  src={image}
-                  alt=""
-                  className="w-full h-full object-cover opacity-60"
-                />
-              </div>
-            ))}
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #08090b;
+      color: #eeeeeb;
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --black: #08090b;
+      --dark: #0d0f12;
+      --panel: rgba(19, 21, 25, 0.72);
+      --border: rgba(255, 255, 255, 0.09);
+
+      --white: #eeeeeb;
+      --muted: #85878b;
+      --soft: #b7b8b5;
+
+      --yellow: #f4c542;
+      --yellow-soft: rgba(244, 197, 66, 0.12);
+
+      --serif: "Playfair Display", Georgia, serif;
+      --mono: "DM Mono", monospace;
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+
+      background:
+        radial-gradient(
+          circle at 50% 20%,
+          rgba(244, 197, 66, 0.055),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(80, 90, 120, 0.08),
+          transparent 30%
+        ),
+        #08090b;
+    }
+
+
+    /* =========================================================
+       CITY SKYLINE
+    ========================================================= */
+
+    .city {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 34vh;
+
+      z-index: -3;
+      pointer-events: none;
+
+      opacity: 0.48;
+    }
+
+    .building {
+      position: absolute;
+      bottom: 0;
+
+      background: linear-gradient(
+        to top,
+        #050607,
+        #0c0e11
+      );
+
+      border-top: 1px solid rgba(255,255,255,0.035);
+    }
+
+    .building::after {
+      content: "";
+
+      position: absolute;
+      inset: 15px 12px;
+
+      background-image:
+        linear-gradient(
+          rgba(244,197,66,0.18) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(244,197,66,0.18) 1px,
+          transparent 1px
+        );
+
+      background-size: 14px 18px;
+
+      opacity: 0.45;
+    }
+
+    .b1 {
+      left: 0;
+      width: 12%;
+      height: 30%;
+    }
+
+    .b2 {
+      left: 9%;
+      width: 10%;
+      height: 58%;
+    }
+
+    .b3 {
+      left: 17%;
+      width: 15%;
+      height: 40%;
+    }
+
+    .b4 {
+      left: 29%;
+      width: 8%;
+      height: 72%;
+    }
+
+    .b5 {
+      left: 35%;
+      width: 15%;
+      height: 48%;
+    }
+
+    .b6 {
+      left: 47%;
+      width: 11%;
+      height: 82%;
+    }
+
+    .b7 {
+      left: 55%;
+      width: 14%;
+      height: 54%;
+    }
+
+    .b8 {
+      left: 67%;
+      width: 8%;
+      height: 72%;
+    }
+
+    .b9 {
+      left: 74%;
+      width: 15%;
+      height: 43%;
+    }
+
+    .b10 {
+      left: 87%;
+      width: 13%;
+      height: 64%;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      z-index: 100;
+
+      padding: 22px 5vw;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: rgba(8, 9, 11, 0.72);
+      backdrop-filter: blur(14px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--soft);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--yellow);
+    }
+
+
+    /* =========================================================
+       GENERAL
+    ========================================================= */
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      color: var(--yellow);
+
+      font-size: 11px;
+      letter-spacing: 2px;
+
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 400;
+
+      line-height: 1.1;
+      margin-bottom: 45px;
+    }
+
+    .section-title em {
+      color: var(--soft);
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    #home {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+
+      padding-top: 120px;
+      position: relative;
+    }
+
+    .hero {
+      max-width: 900px;
+    }
+
+    .hero-small {
+      font-family: var(--mono);
+
+      font-size: 12px;
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      color: var(--yellow);
+
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+
+      font-size: clamp(64px, 10vw, 130px);
+
+      font-weight: 400;
+      line-height: 0.95;
+
+      letter-spacing: -4px;
+
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--soft);
+    }
+
+    .hero-description {
+      max-width: 620px;
+
+      font-size: 17px;
+      color: var(--muted);
+
+      line-height: 1.9;
+
+      margin-bottom: 42px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 13px 21px;
+
+      border: 1px solid var(--border);
+
+      font-family: var(--mono);
+      font-size: 11px;
+
+      letter-spacing: 1px;
+      text-transform: uppercase;
+
+      transition: 0.3s ease;
+    }
+
+    .button.primary {
+      background: var(--yellow);
+      color: #101010;
+
+      border-color: var(--yellow);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button.secondary:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+
+      bottom: 35px;
+      left: 0;
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: var(--muted);
+
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .scroll-line {
+      width: 42px;
+      height: 1px;
+      background: var(--yellow);
+    }
+
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns: 1.2fr 0.8fr;
+
+      gap: 80px;
+
+      align-items: start;
+    }
+
+    .about-text {
+      color: var(--soft);
+
+      font-size: 18px;
+
+      line-height: 1.9;
+    }
+
+    .about-text strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .about-text .highlight {
+      color: var(--yellow);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      padding: 25px 0;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat:nth-child(odd) {
+      margin-right: 25px;
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+
+      font-size: 42px;
+
+      color: var(--white);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+
+      font-size: 9px;
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       EXPERIENCE
+    ========================================================= */
+
+    .experience {
+      border-top: 1px solid var(--border);
+    }
+
+    .experience-item {
+      display: grid;
+
+      grid-template-columns: 180px 1fr auto;
+
+      gap: 40px;
+
+      padding: 32px 0;
+
+      border-bottom: 1px solid var(--border);
+
+      transition: 0.3s ease;
+    }
+
+    .experience-item:hover {
+      padding-left: 12px;
+      background: linear-gradient(
+        90deg,
+        rgba(244,197,66,0.04),
+        transparent
+      );
+    }
+
+    .experience-date {
+      font-family: var(--mono);
+
+      font-size: 10px;
+
+      color: var(--muted);
+
+      padding-top: 4px;
+    }
+
+    .experience-company {
+      font-family: var(--serif);
+
+      font-size: 25px;
+
+      margin-bottom: 4px;
+    }
+
+    .experience-role {
+      font-size: 13px;
+      color: var(--yellow);
+    }
+
+    .experience-arrow {
+      color: var(--muted);
+
+      font-size: 20px;
+
+      transition: 0.3s ease;
+    }
+
+    .experience-item:hover .experience-arrow {
+      color: var(--yellow);
+      transform: translateX(6px);
+    }
+
+
+    /* =========================================================
+       PROJECTS
+    ========================================================= */
+
+    .projects-grid {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 18px;
+    }
+
+    .project {
+      position: relative;
+
+      min-height: 370px;
+
+      padding: 32px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.045),
+          rgba(255,255,255,0.015)
+        );
+
+      border: 1px solid var(--border);
+
+      transition: 0.4s ease;
+    }
+
+    .project::before {
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      border-radius: 50%;
+
+      background: var(--yellow);
+
+      filter: blur(100px);
+
+      opacity: 0;
+
+      top: -120px;
+      right: -100px;
+
+      transition: 0.5s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+
+      border-color: rgba(244,197,66,0.45);
+    }
+
+    .project:hover::before {
+      opacity: 0.08;
+    }
+
+    .project-number {
+      font-family: var(--mono);
+
+      font-size: 10px;
+
+      color: var(--yellow);
+
+      letter-spacing: 2px;
+    }
+
+    .project h3 {
+      font-family: var(--serif);
+
+      font-size: 35px;
+
+      font-weight: 400;
+
+      margin-bottom: 12px;
+    }
+
+    .project-description {
+      max-width: 500px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.8;
+    }
+
+    .project-tools {
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-top: 25px;
+    }
+
+    .tool {
+      padding: 6px 10px;
+
+      border: 1px solid var(--border);
+
+      font-family: var(--mono);
+
+      font-size: 9px;
+
+      color: var(--soft);
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       SKILLS
+    ========================================================= */
+
+    .skills-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .skill-group {
+      padding: 30px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,0.02);
+    }
+
+    .skill-group h3 {
+      font-family: var(--mono);
+
+      font-size: 11px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      color: var(--yellow);
+
+      margin-bottom: 22px;
+    }
+
+    .skill-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .skill-list span {
+      font-family: var(--serif);
+
+      font-size: 20px;
+
+      color: var(--soft);
+    }
+
+
+    /* =========================================================
+       EDUCATION
+    ========================================================= */
+
+    .education {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 60px;
+    }
+
+    .education-card {
+      border-left: 1px solid var(--yellow);
+
+      padding-left: 25px;
+    }
+
+    .education-school {
+      font-family: var(--serif);
+
+      font-size: 28px;
+
+      margin-bottom: 8px;
+    }
+
+    .education-degree {
+      color: var(--yellow);
+
+      font-size: 13px;
+
+      margin-bottom: 12px;
+    }
+
+    .education-details {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    #contact {
+      min-height: 70vh;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-wrapper {
+      width: 100%;
+
+      padding: 70px 0;
+
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-title {
+      font-family: var(--serif);
+
+      font-size: clamp(50px, 8vw, 100px);
+
+      font-weight: 400;
+
+      line-height: 1;
+
+      margin-bottom: 30px;
+    }
+
+    .contact-title span {
+      color: var(--yellow);
+    }
+
+    .contact-email {
+      font-family: var(--mono);
+
+      font-size: 13px;
+
+      color: var(--soft);
+
+      border-bottom: 1px solid var(--yellow);
+
+      padding-bottom: 5px;
+    }
+
+    .social-links {
+      display: flex;
+
+      gap: 25px;
+
+      margin-top: 35px;
+    }
+
+    .social-links a {
+      font-family: var(--mono);
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      color: var(--muted);
+
+      transition: 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--yellow);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 25px 0 45px;
+
+      display: flex;
+      justify-content: space-between;
+
+      font-family: var(--mono);
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       SCROLL ANIMATIONS
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(30px);
+
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .experience-arrow {
+        display: none;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .education {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 85px 0;
+      }
+    }
+
+
+    @media (max-width: 550px) {
+
+      nav {
+        padding: 18px 5%;
+      }
+
+      .nav-name {
+        display: none;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .nav-links a {
+        font-size: 8px;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project {
+        min-height: 330px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       CITY BACKGROUND
+  ========================================================= -->
+
+  <div class="city">
+
+    <div class="building b1"></div>
+    <div class="building b2"></div>
+    <div class="building b3"></div>
+    <div class="building b4"></div>
+    <div class="building b5"></div>
+    <div class="building b6"></div>
+    <div class="building b7"></div>
+    <div class="building b8"></div>
+    <div class="building b9"></div>
+    <div class="building b10"></div>
+
+  </div>
+
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================= -->
+
+  <nav>
+
+    <div class="nav-name">
+      MB / DATA SCIENCE
+    </div>
+
+    <div class="nav-links">
+
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================= -->
+
+  <main>
+
+    <section id="home">
+
+      <div class="container">
+
+        <div class="hero reveal">
+
+          <div class="hero-small">
+            Data Scientist · Business Intelligence
           </div>
-        </div>
 
-        {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-background/30" />
-
-        {/* Centered Title - Overlaid */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-bold tracking-tight text-foreground">
-            Jordan Studio
+          <h1>
+            Montserrat
+            <span>Balleza.</span>
           </h1>
-        </div>
 
-        {/* Bio - Bottom Left */}
-        <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 z-10 max-w-xs md:max-w-sm">
-          <p className="text-sm md:text-base font-sans text-foreground/80 leading-relaxed">
-            Hi! I'm Jordan, an independent artist and designer specializing in brand identity, illustration, and visual design. I help brands tell their stories through thoughtful, distinctive creative work.
+          <p class="hero-description">
+            I turn complex data into actionable business insights —
+            combining data science, analytics, visualization, and
+            business intelligence to solve real-world problems.
           </p>
-        </div>
-      </section>
-    </Layout>
-  );
-};
 
-export default Index;
+          <div class="hero-buttons">
+
+            <a href="#projects" class="button primary">
+              Explore my work
+            </a>
+
+            <a href="#contact" class="button secondary">
+              Get in touch
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="scroll-indicator">
+
+          <span class="scroll-line"></span>
+
+          SCROLL TO EXPLORE
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         ABOUT
+    ======================================================== -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="section-label reveal">
+          01 / ABOUT
+        </div>
+
+        <div class="about-grid">
+
+          <div class="reveal">
+
+            <h2 class="section-title">
+              Data with a
+              <em>business purpose.</em>
+            </h2>
+
+            <p class="about-text">
+
+              I'm a <strong>Data Scientist and Business Intelligence
+              Specialist</strong> with experience in data quality
+              governance, statistical modeling, dashboard development,
+              and strategic analytics.
+
+              <br><br>
+
+              I enjoy transforming complex datasets into insights
+              that people can actually use — whether that's improving
+              reporting accuracy, optimizing operations, understanding
+              audiences, or supporting strategic decisions.
+
+              <br><br>
+
+              My experience spans <span class="highlight">
+              FMCG, retail, media, fashion, luxury, and government
+              </span> environments.
+
+            </p>
+
+          </div>
+
+
+          <div class="stats reveal">
+
+            <div class="stat">
+
+              <div class="stat-number">5+</div>
+
+              <div class="stat-label">
+                Years of experience
+              </div>
+
+            </div>
+
+
+            <div class="stat">
+
+              <div class="stat-number">18%</div>
+
+              <div class="stat-label">
+                Reporting accuracy improvement
+              </div>
+
+            </div>
+
+
+            <div class="stat">
+
+              <div class="stat-number">25%</div>
+
+              <div class="stat-label">
+                Reporting efficiency improvement
+              </div>
+
+            </div>
+
+
+            <div class="stat">
+
+              <div class="stat-number">80%</div>
+
+              <div class="stat-label">
+                Delivery-time improvement
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         EXPERIENCE
+    ======================================================== -->
+
+    <section id="experience">
+
+      <div class="container">
+
+        <div class="section-label reveal">
+          02 / EXPERIENCE
+        </div>
+
+        <h2 class="section-title reveal">
+          Where I've
+          <em>worked.</em>
+        </h2>
+
+
+        <div class="experience">
+
+
+          <!-- CONDÉ NAST -->
+
+          <div class="experience-item reveal">
+
+            <div class="experience-date">
+              FEB 2025 — PRESENT
+            </div>
+
+            <div>
+
+              <div class="experience-company">
+                Condé Nast
+              </div>
+
+              <div class="experience-role">
+                Audience Analytics Analyst
+              </div>
+
+            </div>
+
+            <div class="experience-arrow">
+              →
+            </div>
+
+          </div>
+
+
+          <!-- NIELSENIQ -->
+
+          <div class="experience-item reveal">
+
+            <div class="experience-date">
+              APR 2023 — DEC 2025
+            </div>
+
+            <div>
+
+              <div class="experience-company">
+                NielsenIQ
+              </div>
+
+              <div class="experience-role">
+                Data Scientist — Data Governance & Product Development
+              </div>
+
+            </div>
+
+            <div class="experience-arrow">
+              →
+            </div>
+
+          </div>
+
+
+          <!-- ESTEE LAUDER -->
+
+          <div class="experience-item reveal">
+
+            <div class="experience-date">
+              APR 2022 — APR 2023
+            </div>
+
+            <div>
+
+              <div class="experience-company">
+                The Estée Lauder Companies
+              </div>
+
+              <div class="experience-role">
+                Analytics Trainee — Center of Excellence
+              </div>
+
+            </div>
+
+            <div class="experience-arrow">
+              →
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         PROJECTS
+    ======================================================== -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-label reveal">
+          03 / SELECTED WORK
+        </div>
+
+        <h2 class="section-title reveal">
+          Projects that
+          <em>made an impact.</em>
+        </h2>
+
+
+        <div class="projects-grid">
+
+
+          <!-- PROJECT 01 -->
+
+          <article class="project reveal">
+
+            <div>
+
+              <div class="project-number">
+                01 / OPERATIONS
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+                Coca-Cola FEMSA
+              </h3>
+
+              <p class="project-description">
+
+                Analyzed refrigeration processes across bottling
+                facilities to identify opportunities for reducing
+                operational costs and environmental impact.
+
+              </p>
+
+              <div class="project-tools">
+
+                <span class="tool">
+                  RStudio
+                </span>
+
+                <span class="tool">
+                  Power BI
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 02 -->
+
+          <article class="project reveal">
+
+            <div>
+
+              <div class="project-number">
+                02 / MARKETING
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+                MARS Inc.
+              </h3>
+
+              <p class="project-description">
+
+                Cleaned and normalized marketing data for the
+                Snickers brand to support evaluation of campaigns
+                targeted at gamers.
+
+              </p>
+
+              <div class="project-tools">
+
+                <span class="tool">
+                  Excel
+                </span>
+
+                <span class="tool">
+                  Data Cleaning
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 03 -->
+
+          <article class="project reveal">
+
+            <div>
+
+              <div class="project-number">
+                03 / WORKFORCE
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+                Inter-Con
+              </h3>
+
+              <p class="project-description">
+
+                Built scheduling and monitoring tools that helped
+                planning coordinators identify operational and
+                workforce-management issues, improving delivery
+                times by 80% in 10 weeks.
+
+              </p>
+
+              <div class="project-tools">
+
+                <span class="tool">
+                  Python
+                </span>
+
+                <span class="tool">
+                  Excel
+                </span>
+
+                <span class="tool">
+                  Salesforce
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- PROJECT 04 -->
+
+          <article class="project reveal">
+
+            <div>
+
+              <div class="project-number">
+                04 / AUDIENCE ANALYTICS
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <h3>
+                Audience Intelligence
+              </h3>
+
+              <p class="project-description">
+
+                Analyzed audience behavior and content performance
+                across digital brands to identify engagement trends,
+                growth opportunities, and content optimization
+                opportunities.
+
+              </p>
+
+              <div class="project-tools">
+
+                <span class="tool">
+                  SQL
+                </span>
+
+                <span class="tool">
+                  Python
+                </span>
+
+                <span class="tool">
+                  Databricks
+                </span>
+
+                <span class="tool">
+                  Looker Studio
+                </span>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SKILLS
+    ======================================================== -->
+
+    <section id="skills">
+
+      <div class="container">
+
+        <div class="section-label reveal">
+          04 / TOOLKIT
+        </div>
+
+        <h2 class="section-title reveal">
+          My technical
+          <em>toolkit.</em>
+        </h2>
+
+
+        <div class="skills-grid">
+
+
+          <!-- DATA SCIENCE -->
+
+          <div class="skill-group reveal">
+
+            <h3>
+              Data Science
+            </h3>
+
+            <div class="skill-list">
+
+              <span>R</span>
+              <span>Python</span>
+              <span>SQL</span>
+              <span>Machine Learning</span>
+              <span>Statistical Analysis</span>
+              <span>Web Scraping</span>
+
+            </div>
+
+          </div>
+
+
+          <!-- BUSINESS INTELLIGENCE -->
+
+          <div class="skill-group reveal">
+
+            <h3>
+              Business Intelligence
+            </h3>
+
+            <div class="skill-list">
+
+              <span>Power BI</span>
+              <span>Tableau</span>
+              <span>Advanced Excel</span>
+              <span>QGIS</span>
+              <span>Salesforce</span>
+              <span>Data Visualization</span>
+
+            </div>
+
+          </div>
+
+
+          <!-- AI / ENTERPRISE -->
+
+          <div class="skill-group reveal">
+
+            <h3>
+              AI & Enterprise
+            </h3>
+
+            <div class="skill-list">
+
+              <span>Alteryx</span>
+              <span>SAS</span>
+              <span>IBM Watson</span>
+              <span>Data Governance</span>
+              <span>ETL</span>
+              <span>Unstructured Data</span>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         EDUCATION
+    ======================================================== -->
+
+    <section id="education">
+
+      <div class="container">
+
+        <div class="section-label reveal">
+          05 / EDUCATION
+        </div>
+
+        <div class="education">
+
+
+          <div class="education-card reveal">
+
+            <div class="education-school">
+              Tecnológico de Monterrey
+            </div>
+
+            <div class="education-degree">
+              Bachelor's in Business Intelligence
+            </div>
+
+            <div class="education-details">
+
+              Campus Estado de México<br>
+
+              Concentration in Data Analytics and
+              Artificial Intelligence Tools<br>
+
+              Specialization in Business-Oriented
+              Artificial Intelligence<br>
+
+              Graduated June 2023
+
+            </div>
+
+          </div>
+
+
+          <div class="education-card reveal">
+
+            <div class="education-school">
+              Certifications
+            </div>
+
+            <div class="education-degree">
+              Selected
+            </div>
+
+            <div class="education-details">
+
+              Salesforce Trailblazer — Reports & Dashboards
+              for Lightning Experience<br><br>
+
+              IELTS Academic — C2 Level, Overall Band 8.5<br><br>
+
+              Enterprise Data Science in Practice — IBM<br><br>
+
+              Building Trustworthy AI Enterprise Solutions — IBM
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CONTACT
+    ======================================================== -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact-wrapper reveal">
+
+          <div class="section-label">
+            06 / CONTACT
+          </div>
+
+          <h2 class="contact-title">
+            Let's build
+            <span>something.</span>
+          </h2>
+
+          <a
+            class="contact-email"
+            href="mailto:montserratballeza@outlook.com"
+          >
+            montserratballeza@outlook.com
+          </a>
+
+
+          <div class="social-links">
+
+            <a
+              href="mailto:montserratballeza@outlook.com"
+            >
+              Email
+            </a>
+
+            <!-- Replace this href with your LinkedIn URL -->
+            <a
+              href="#"
+              onclick="return false;"
+              title="Add your LinkedIn URL"
+            >
+              LinkedIn
+            </a>
+
+            <!-- Replace this href with your GitHub URL -->
+            <a
+              href="#"
+              onclick="return false;"
+              title="Add your GitHub URL"
+            >
+              GitHub
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <div class="container">
+
+    <footer>
+
+      <span>
+        © 2026 Montserrat Balleza
+      </span>
+
+      <span>
+        DATA · BUSINESS · INTELLIGENCE
+      </span>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+  <script>
+
+    /*
+      SCROLL REVEAL
+      Elements fade and move upward when they enter the viewport.
+    */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+      new IntersectionObserver(
+
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
+      );
+
+
+    revealElements.forEach((element) => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+    /*
+      SMALL PARALLAX EFFECT
+      Gives the city skyline a subtle sense of movement.
+    */
+
+    const city =
+      document.querySelector(".city");
+
+
+    window.addEventListener("scroll", () => {
+
+      const scrollPosition =
+        window.scrollY;
+
+      city.style.transform =
+        `translateY(${scrollPosition * 0.04}px)`;
+
+    });
+
+
+    /*
+      NAVIGATION BACKGROUND
+      Makes the navigation slightly darker once the
+      user starts scrolling.
+    */
+
+    const nav =
+      document.querySelector("nav");
+
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+
+        nav.style.background =
+          "rgba(8, 9, 11, 0.92)";
+
+      } else {
+
+        nav.style.background =
+          "rgba(8, 9, 11, 0.72)";
+
+      }
+
+    });
+
+
+  </script>
+
+
+</body>
+</html>
+```
