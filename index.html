@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Montserrat Balleza | Data Scientist · Beauty &amp; Luxury Analytics</title>
+<meta name="description" content="Data scientist for beauty, fashion and luxury brands. Audience analytics at Condé Nast, pricing at Estée Lauder, consumer insights at NielsenIQ." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:"Inter",sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+/* COLORS: white, black and red. Edit here to retune. */
+:root{
+  --black:#faf9f6; --white:#0b0b0b; --muted:#5b5d61; --soft:#34363a;
+  --border:rgba(0,0,0,.14); --line:rgba(0,0,0,.05);
+  --accent:#b3111c; --accent-strong:#b3111c; --on-accent:#fff;
+  --glow:rgba(179,17,28,.07); --nav:rgba(250,249,246,.85); --card:rgba(0,0,0,.025);
+  --serif:"Playfair Display",Georgia,serif; --mono:"DM Mono",monospace;
+}
+
+/* BACKGROUND: soft glow plus runway pinstripes */
+body::before{content:"";position:fixed;inset:0;z-index:-5;background:radial-gradient(circle at 50% 18%,var(--glow),transparent 32%),var(--black)}
+.city{position:fixed;inset:0;z-index:-3;pointer-events:none;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 140px);-webkit-mask-image:linear-gradient(to top,#000,transparent 75%);mask-image:linear-gradient(to top,#000,transparent 75%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:22px 5vw;display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-name{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--soft)}
+.nav-right{display:flex;align-items:center;gap:28px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:.25s}
+.nav-links a:hover{color:var(--accent)}
+
+/* GENERAL */
+.container{width:min(1120px,90%);margin:auto}
+section{padding:120px 0}
+.section-label{font-family:var(--mono);color:var(--accent);font-size:11px;letter-spacing:2px;margin-bottom:20px}
+.section-title{font-family:var(--serif);font-size:clamp(38px,5vw,64px);font-weight:400;line-height:1.1;margin-bottom:45px}
+.section-title em{color:var(--soft)}
+
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;padding-top:120px;position:relative}
+.hero{max-width:900px}
+.hero-small{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:28px}
+.hero h1{font-family:var(--serif);font-size:clamp(64px,10vw,130px);font-weight:400;line-height:.95;letter-spacing:-4px;margin-bottom:30px}
+.hero h1 span{display:block;color:var(--soft);font-style:italic}
+.hero-description{max-width:620px;font-size:17px;color:var(--muted);line-height:1.9;margin-bottom:42px}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.button{display:inline-flex;align-items:center;justify-content:center;padding:13px 21px;border:1px solid var(--border);font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;transition:.3s}
+.button.primary{background:var(--accent-strong);color:var(--on-accent);border-color:var(--accent-strong)}
+.button:hover{transform:translateY(-3px)}
+.button.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.scroll-indicator{position:absolute;bottom:35px;left:0;display:flex;align-items:center;gap:12px;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:1px}
+.scroll-line{width:42px;height:1px;background:var(--accent)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:start}
+.about-text{color:var(--soft);font-size:18px;line-height:1.9}
+.about-text strong{color:var(--white);font-weight:500}
+.about-text .highlight{color:var(--accent)}
+.stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.stat{padding:25px 0;border-bottom:1px solid var(--border)}
+.stat:nth-child(odd){margin-right:25px}
+.stat-number{font-family:var(--serif);font-size:42px;color:var(--white)}
+.stat-label{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.brands{margin-top:60px;padding-top:28px;border-top:1px solid var(--border)}
+.brands-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.brands-list{display:flex;flex-wrap:wrap;gap:10px 34px;font-family:var(--serif);font-size:22px;color:var(--soft)}
+
+/* EXPERIENCE */
+.experience{border-top:1px solid var(--border)}
+.experience-item{display:grid;grid-template-columns:180px 1fr auto;gap:40px;padding:32px 0;border-bottom:1px solid var(--border);transition:.3s}
+.experience-item:hover{padding-left:12px;background:linear-gradient(90deg,var(--glow),transparent)}
+.experience-date{font-family:var(--mono);font-size:10px;color:var(--muted);padding-top:4px}
+.experience-company{font-family:var(--serif);font-size:25px;margin-bottom:4px}
+.experience-role{font-size:13px;color:var(--accent)}
+.experience-desc{max-width:640px;margin-top:14px;font-size:14px;line-height:1.8;color:var(--muted)}
+.experience-arrow{color:var(--muted);font-size:20px;transition:.3s}
+.experience-item:hover .experience-arrow{color:var(--accent);transform:translateX(6px)}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project{position:relative;min-height:340px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:.4s}
+.project::before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:var(--accent);filter:blur(100px);opacity:0;top:-120px;right:-100px;transition:.5s}
+.project:hover{transform:translateY(-7px);border-color:var(--accent)}
+.project:hover::before{opacity:.12}
+.project-number{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px}
+.project h3{font-family:var(--serif);font-size:32px;font-weight:400;line-height:1.15;margin-bottom:12px}
+.project-description{max-width:500px;color:var(--muted);font-size:14px;line-height:1.8}
+.project-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}
+.tool{padding:6px 10px;border:1px solid var(--border);font-family:var(--mono);font-size:9px;color:var(--soft);text-transform:uppercase}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.skill-group{padding:30px;border:1px solid var(--border);background:var(--card)}
+.skill-group h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
+.skill-list{display:flex;flex-direction:column;gap:12px}
+.skill-list span{font-family:var(--serif);font-size:20px;color:var(--soft)}
+
+/* EDUCATION */
+.education{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.education-card{border-left:1px solid var(--accent);padding-left:25px}
+.education-school{font-family:var(--serif);font-size:25px;line-height:1.2;margin-bottom:8px}
+.education-degree{color:var(--accent);font-size:13px;margin-bottom:12px}
+.education-details{color:var(--muted);font-size:13px;line-height:1.8}
+
+/* CONTACT */
+#contact{min-height:70vh;display:flex;align-items:center}
+.contact-wrapper{width:100%;padding:70px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.contact-title{font-family:var(--serif);font-size:clamp(50px,8vw,100px);font-weight:400;line-height:1;margin-bottom:30px}
+.contact-title span{color:var(--accent);font-style:italic}
+.contact-email{font-family:var(--mono);font-size:13px;color:var(--soft);border-bottom:1px solid var(--accent);padding-bottom:5px}
+.social-links{display:flex;gap:25px;margin-top:35px}
+.social-links a{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);transition:.3s}
+.social-links a:hover{color:var(--accent)}
+footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted)}
+
+/* ANIMATION */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* RESPONSIVE */
+@media (max-width:900px){.education{grid-template-columns:1fr}}
+@media (max-width:800px){
+  .nav-links{gap:12px}
+  .nav-links a{font-size:9px}
+  .hero h1{letter-spacing:-2px}
+  .about-grid{grid-template-columns:1fr;gap:50px}
+  .experience-item{grid-template-columns:1fr;gap:8px}
+  .experience-arrow{display:none}
+  .projects-grid,.skills-grid{grid-template-columns:1fr}
+  section{padding:85px 0}
+}
+@media (max-width:550px){
+  nav{padding:18px 5%}
+  .nav-name{display:none}
+  .nav-right{width:100%}
+  .nav-links{width:100%;justify-content:space-between}
+  .nav-links a{font-size:8px}
+  .hero h1{font-size:58px}
+  .hero-description{font-size:15px}
+  .project{min-height:300px}
+  .brands-list{font-size:18px}
+  footer{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="city" aria-hidden="true"></div>
+
+<nav>
+  <div class="nav-name">MB / DATA &amp; LUXURY</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section id="home">
+  <div class="container">
+    <div class="hero reveal">
+      <div class="hero-small">Data Scientist · Beauty, Fashion &amp; Luxury Analytics</div>
+      <h1>Montserrat <span>Balleza.</span></h1>
+      <p class="hero-description">I turn complex data into decisions for beauty, fashion and luxury brands, from audience analytics at Condé Nast to pricing at Estée Lauder and consumer insights at NielsenIQ.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="button primary">Explore my work</a>
+        <a href="#contact" class="button secondary">Get in touch</a>
+      </div>
+    </div>
+    <div class="scroll-indicator"><span class="scroll-line"></span>SCROLL TO EXPLORE</div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">01 / ABOUT</div>
+    <div class="about-grid">
+      <div class="reveal">
+        <h2 class="section-title">Data for brands <em>people love.</em></h2>
+        <p class="about-text">
+          I'm a <strong>Data Scientist</strong> and Master of Management in Analytics student at McGill's Desautels Faculty of Management, with experience in audience analytics, pricing, data quality governance and statistical modeling.
+          <br><br>
+          I like turning messy consumer and audience data into insights a brand team can act on, whether that's understanding what an audience watches, how a fragrance is priced, or why a number moved.
+          <br><br>
+          My experience spans <span class="highlight">beauty, fashion, luxury media, FMCG and retail</span> environments.
+        </p>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><div class="stat-number">5+</div><div class="stat-label">Years of experience</div></div>
+        <div class="stat"><div class="stat-number">30%</div><div class="stat-label">Data inconsistency reduced</div></div>
+        <div class="stat"><div class="stat-number">22%</div><div class="stat-label">Central analytics workload cut</div></div>
+        <div class="stat"><div class="stat-number">80%</div><div class="stat-label">Delivery-time improvement</div></div>
+      </div>
+    </div>
+    <div class="brands reveal">
+      <div class="brands-label">Brands across my work</div>
+      <div class="brands-list">
+        <span>Estée Lauder</span><span>Condé Nast</span><span>Vanity Fair</span><span>P&amp;G</span><span>Unilever</span><span>Colgate-Palmolive</span><span>PepsiCo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">02 / EXPERIENCE</div>
+    <h2 class="section-title reveal">Where I've <em>worked.</em></h2>
+    <div class="experience">
+
+      <div class="experience-item reveal">
+        <div class="experience-date">JAN 2026 — AUG 2026</div>
+        <div>
+          <div class="experience-company">Condé Nast</div>
+          <div class="experience-role">Audience Analyst</div>
+          <p class="experience-desc">Audience reporting for Vanity Fair, the Met Gala, the Oscars Party, WOTY and MOTY. Built YouTube API and Databricks tools for domestic and global KPIs, and traced performance shifts to YouTube and Google algorithm changes.</p>
+        </div>
+        <div class="experience-arrow">→</div>
+      </div>
+
+      <div class="experience-item reveal">
+        <div class="experience-date">APR 2023 — JUL 2025</div>
+        <div>
+          <div class="experience-company">NielsenIQ</div>
+          <div class="experience-role">Data Scientist: Data Governance &amp; Product Development</div>
+          <p class="experience-desc">Led data quality and governance across MarketTrack and SmartTrack releases, and delivered insights to P&amp;G, Unilever, Colgate-Palmolive, PepsiCo and British American Tobacco.</p>
+        </div>
+        <div class="experience-arrow">→</div>
+      </div>
+
+      <div class="experience-item reveal">
+        <div class="experience-date">DEC 2022 — DEC 2023</div>
+        <div>
+          <div class="experience-company">The Estée Lauder Companies</div>
+          <div class="experience-role">Analytics Trainee, Center of Excellence</div>
+          <p class="experience-desc">Analyzed sales performance and price elasticity in fragrance and haircare, and automated quarterly and annual regional reports, lifting reporting efficiency 15%.</p>
+        </div>
+        <div class="experience-arrow">→</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">03 / SELECTED WORK</div>
+    <h2 class="section-title reveal">Projects with <em>style.</em></h2>
+    <div class="projects-grid">
+
+      <article class="project reveal">
+        <div class="project-number">01 / LUXURY · IN PROGRESS</div>
+        <div>
+          <h3>Luxury Fashion House Classifier</h3>
+          <p class="project-description">A deep-learning image classifier that identifies Versace, Chanel, Ralph Lauren and Issey Miyake from runway photography.</p>
+          <div class="project-tools"><span class="tool">Python</span><span class="tool">Deep Learning</span><span class="tool">Computer Vision</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-number">02 / BEAUTY</div>
+        <div>
+          <h3>Beauty Review Sentiment</h3>
+          <p class="project-description">A VADER-inspired sentiment methodology applied to L'Oréal Telescopic mascara reviews to read what customers actually feel.</p>
+          <div class="project-tools"><span class="tool">Python</span><span class="tool">NLP</span><span class="tool">Sentiment Analysis</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-number">03 / AUDIENCE ANALYTICS</div>
+        <div>
+          <h3>Audience Intelligence</h3>
+          <p class="project-description">Analyzed audience behavior and content performance across Condé Nast brands to find engagement trends and growth opportunities, cutting central analytics workload by 22%.</p>
+          <div class="project-tools"><span class="tool">YouTube API</span><span class="tool">Databricks</span><span class="tool">SQL</span><span class="tool">Looker Studio</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-number">04 / PRICING</div>
+        <div>
+          <h3>Fragrance &amp; Haircare Pricing</h3>
+          <p class="project-description">Price elasticity and sales analysis for Estée Lauder's fragrance and haircare categories, plus automated regional reporting.</p>
+          <div class="project-tools"><span class="tool">Price Elasticity</span><span class="tool">Reporting Automation</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-number">05 / WORKFORCE</div>
+        <div>
+          <h3>Inter-Con</h3>
+          <p class="project-description">Built scheduling and monitoring tools that helped planning coordinators spot operational and workforce issues, improving delivery times by 80% in 10 weeks.</p>
+          <div class="project-tools"><span class="tool">Python</span><span class="tool">Excel</span><span class="tool">Salesforce</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project-number">06 / OPERATIONS</div>
+        <div>
+          <h3>Coca-Cola FEMSA</h3>
+          <p class="project-description">Used logistic regression on refrigeration processes across 7 bottling plants to cut operational costs and environmental impact, and automated data standardization to halve cleaning time.</p>
+          <div class="project-tools"><span class="tool">RStudio</span><span class="tool">Power BI</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">04 / TOOLKIT</div>
+    <h2 class="section-title reveal">My technical <em>toolkit.</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal"><h3>Data Science</h3><div class="skill-list"><span>R</span><span>Python</span><span>SQL</span><span>Machine Learning</span><span>Deep Learning</span><span>NLP &amp; Sentiment</span></div></div>
+      <div class="skill-group reveal"><h3>Business Intelligence</h3><div class="skill-list"><span>Power BI</span><span>Tableau</span><span>Databricks</span><span>Audience Analytics</span><span>Pricing Analytics</span><span>Data Visualization</span></div></div>
+      <div class="skill-group reveal"><h3>AI &amp; Enterprise</h3><div class="skill-list"><span>Alteryx</span><span>Salesforce</span><span>IBM Watson</span><span>Data Governance</span><span>ETL</span><span>QGIS</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="section-label reveal">05 / EDUCATION</div>
+    <div class="education">
+      <div class="education-card reveal">
+        <div class="education-school">McGill University</div>
+        <div class="education-degree">Master of Management in Analytics</div>
+        <div class="education-details">Desautels Faculty of Management<br>Montréal, Canada<br>Jul 2026 — Oct 2027</div>
+      </div>
+      <div class="education-card reveal">
+        <div class="education-school">Tecnológico de Monterrey</div>
+        <div class="education-degree">Bachelor's in Business Intelligence</div>
+        <div class="education-details">4.0 GPA<br>Concentration in Data Analytics and Artificial Intelligence<br>Specialization in Business-Oriented AI<br>Graduated June 2023</div>
+      </div>
+      <div class="education-card reveal">
+        <div class="education-school">Certifications</div>
+        <div class="education-degree">Selected</div>
+        <div class="education-details">Salesforce Trailblazer: Reports &amp; Dashboards<br>IELTS Academic: C2, Band 8.5<br>Enterprise Data Science in Practice (IBM)<br>Building Trustworthy AI Enterprise Solutions (IBM)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrapper reveal">
+      <div class="section-label">06 / CONTACT</div>
+      <h2 class="contact-title">Let's build <span>something iconic.</span></h2>
+      <a class="contact-email" href="mailto:montseballeza@hotmail.com">montseballeza@hotmail.com</a>
+      <div class="social-links">
+        <a href="mailto:montseballeza@hotmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/montserrat-balleza-1631741b6/" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- Replace this href with your GitHub URL -->
+        <a href="#" onclick="return false;" title="Add your GitHub URL">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="container">
+  <footer>
+    <span>© 2026 Montserrat Balleza</span>
+    <span>DATA · BEAUTY · LUXURY</span>
+  </footer>
+</div>
+
+<script>
+// Scroll reveal
+var revealObserver = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(function (el) { revealObserver.observe(el); });
+
+// Subtle parallax on the pinstripe backdrop
+var backdrop = document.querySelector(".city");
+window.addEventListener("scroll", function () {
+  backdrop.style.transform = "translateY(" + window.scrollY * 0.04 + "px)";
+});
+</script>
+
+</body>
+</html>
