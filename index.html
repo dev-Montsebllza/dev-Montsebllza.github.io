@@ -14,7 +14,7 @@ html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:"Inter",sans-serif;line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
- 
+
 /* COLORS: white, black and red. Edit here to retune. */
 :root{
   --black:#faf9f6; --white:#0b0b0b; --muted:#5b5d61; --soft:#34363a;
@@ -23,11 +23,11 @@ button{font-family:inherit}
   --glow:rgba(179,17,28,.07); --nav:rgba(250,249,246,.85); --card:rgba(0,0,0,.025);
   --serif:"Playfair Display",Georgia,serif; --mono:"DM Mono",monospace;
 }
- 
+
 /* BACKGROUND: soft glow plus runway pinstripes */
 body::before{content:"";position:fixed;inset:0;z-index:-5;background:radial-gradient(circle at 50% 18%,var(--glow),transparent 32%),var(--black)}
 .city{position:fixed;inset:0;z-index:-3;pointer-events:none;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 140px);-webkit-mask-image:linear-gradient(to top,#000,transparent 75%);mask-image:linear-gradient(to top,#000,transparent 75%)}
- 
+
 /* NAV */
 nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:22px 5vw;display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav-name{font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--soft)}
@@ -35,14 +35,14 @@ nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:22px 5vw;display:
 .nav-links{display:flex;gap:28px}
 .nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:.25s}
 .nav-links a:hover{color:var(--accent)}
- 
+
 /* GENERAL */
 .container{width:min(1120px,90%);margin:auto}
 section{padding:120px 0}
 .section-label{font-family:var(--mono);color:var(--accent);font-size:11px;letter-spacing:2px;margin-bottom:20px}
 .section-title{font-family:var(--serif);font-size:clamp(38px,5vw,64px);font-weight:400;line-height:1.1;margin-bottom:45px}
 .section-title em{color:var(--soft)}
- 
+
 /* HERO */
 #home{min-height:100vh;display:flex;align-items:center;padding-top:120px;position:relative}
 .hero{max-width:900px}
@@ -57,7 +57,7 @@ section{padding:120px 0}
 .button.secondary:hover{border-color:var(--accent);color:var(--accent)}
 .scroll-indicator{position:absolute;bottom:35px;left:0;display:flex;align-items:center;gap:12px;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:1px}
 .scroll-line{width:42px;height:1px;background:var(--accent)}
- 
+
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:start}
 .about-text{color:var(--soft);font-size:18px;line-height:1.9}
@@ -71,7 +71,7 @@ section{padding:120px 0}
 .brands{margin-top:60px;padding-top:28px;border-top:1px solid var(--border)}
 .brands-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
 .brands-list{display:flex;flex-wrap:wrap;gap:10px 34px;font-family:var(--serif);font-size:22px;color:var(--soft)}
- 
+
 /* EXPERIENCE */
 .experience{border-top:1px solid var(--border)}
 .experience-item{display:grid;grid-template-columns:180px 1fr auto;gap:40px;padding:32px 0;border-bottom:1px solid var(--border);transition:.3s}
@@ -82,7 +82,7 @@ section{padding:120px 0}
 .experience-desc{max-width:640px;margin-top:14px;font-size:14px;line-height:1.8;color:var(--muted)}
 .experience-arrow{color:var(--muted);font-size:20px;transition:.3s}
 .experience-item:hover .experience-arrow{color:var(--accent);transform:translateX(6px)}
- 
+
 /* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .project{position:relative;min-height:340px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:.4s}
@@ -94,21 +94,21 @@ section{padding:120px 0}
 .project-description{max-width:500px;color:var(--muted);font-size:14px;line-height:1.8}
 .project-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:25px}
 .tool{padding:6px 10px;border:1px solid var(--border);font-family:var(--mono);font-size:9px;color:var(--soft);text-transform:uppercase}
- 
+
 /* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .skill-group{padding:30px;border:1px solid var(--border);background:var(--card)}
 .skill-group h3{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:22px}
 .skill-list{display:flex;flex-direction:column;gap:12px}
 .skill-list span{font-family:var(--serif);font-size:20px;color:var(--soft)}
- 
+
 /* EDUCATION */
 .education{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
 .education-card{border-left:1px solid var(--accent);padding-left:25px}
 .education-school{font-family:var(--serif);font-size:25px;line-height:1.2;margin-bottom:8px}
 .education-degree{color:var(--accent);font-size:13px;margin-bottom:12px}
 .education-details{color:var(--muted);font-size:13px;line-height:1.8}
- 
+
 /* CONTACT */
 #contact{min-height:70vh;display:flex;align-items:center}
 .contact-wrapper{width:100%;padding:70px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -119,12 +119,12 @@ section{padding:120px 0}
 .social-links a{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);transition:.3s}
 .social-links a:hover{color:var(--accent)}
 footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--muted)}
- 
+
 /* ANIMATION */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
 .reveal.visible{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
- 
+
 /* RESPONSIVE */
 @media (max-width:900px){.education{grid-template-columns:1fr}}
 @media (max-width:800px){
@@ -152,9 +152,9 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
 </style>
 </head>
 <body>
- 
+
 <div class="city" aria-hidden="true"></div>
- 
+
 <nav>
   <div class="nav-name">MB / DATA &amp; LUXURY</div>
   <div class="nav-right">
@@ -167,9 +167,9 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     </div>
   </div>
 </nav>
- 
+
 <main>
- 
+
 <section id="home">
   <div class="container">
     <div class="hero reveal">
@@ -184,7 +184,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     <div class="scroll-indicator"><span class="scroll-line"></span>SCROLL TO EXPLORE</div>
   </div>
 </section>
- 
+
 <section id="about">
   <div class="container">
     <div class="section-label reveal">01 / ABOUT</div>
@@ -214,13 +214,13 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     </div>
   </div>
 </section>
- 
+
 <section id="experience">
   <div class="container">
     <div class="section-label reveal">02 / EXPERIENCE</div>
     <h2 class="section-title reveal">Where I've <em>worked.</em></h2>
     <div class="experience">
- 
+
       <div class="experience-item reveal">
         <div class="experience-date">JAN 2026 — AUG 2026</div>
         <div>
@@ -230,7 +230,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
         </div>
         <div class="experience-arrow">→</div>
       </div>
- 
+
       <div class="experience-item reveal">
         <div class="experience-date">APR 2023 — JUL 2025</div>
         <div>
@@ -240,7 +240,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
         </div>
         <div class="experience-arrow">→</div>
       </div>
- 
+
       <div class="experience-item reveal">
         <div class="experience-date">DEC 2022 — DEC 2023</div>
         <div>
@@ -250,17 +250,17 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
         </div>
         <div class="experience-arrow">→</div>
       </div>
- 
+
     </div>
   </div>
 </section>
- 
+
 <section id="projects">
   <div class="container">
     <div class="section-label reveal">03 / SELECTED WORK</div>
     <h2 class="section-title reveal">Projects with <em>style.</em></h2>
     <div class="projects-grid">
- 
+
       <article class="project reveal">
         <div class="project-number">01 / LUXURY · IN PROGRESS</div>
         <div>
@@ -269,7 +269,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">Python</span><span class="tool">Deep Learning</span><span class="tool">Computer Vision</span></div>
         </div>
       </article>
- 
+
       <article class="project reveal">
         <div class="project-number">02 / BEAUTY</div>
         <div>
@@ -278,7 +278,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">Python</span><span class="tool">NLP</span><span class="tool">Sentiment Analysis</span></div>
         </div>
       </article>
- 
+
       <article class="project reveal">
         <div class="project-number">03 / AUDIENCE ANALYTICS</div>
         <div>
@@ -287,7 +287,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">YouTube API</span><span class="tool">Databricks</span><span class="tool">SQL</span><span class="tool">Looker Studio</span></div>
         </div>
       </article>
- 
+
       <article class="project reveal">
         <div class="project-number">04 / PRICING</div>
         <div>
@@ -296,7 +296,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">Price Elasticity</span><span class="tool">Reporting Automation</span></div>
         </div>
       </article>
- 
+
       <article class="project reveal">
         <div class="project-number">05 / WORKFORCE</div>
         <div>
@@ -305,7 +305,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">Python</span><span class="tool">Excel</span><span class="tool">Salesforce</span></div>
         </div>
       </article>
- 
+
       <article class="project reveal">
         <div class="project-number">06 / OPERATIONS</div>
         <div>
@@ -314,11 +314,11 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
           <div class="project-tools"><span class="tool">RStudio</span><span class="tool">Power BI</span></div>
         </div>
       </article>
- 
+
     </div>
   </div>
 </section>
- 
+
 <section id="skills">
   <div class="container">
     <div class="section-label reveal">04 / TOOLKIT</div>
@@ -330,7 +330,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     </div>
   </div>
 </section>
- 
+
 <section id="education">
   <div class="container">
     <div class="section-label reveal">05 / EDUCATION</div>
@@ -353,7 +353,7 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     </div>
   </div>
 </section>
- 
+
 <section id="contact">
   <div class="container">
     <div class="contact-wrapper reveal">
@@ -369,16 +369,16 @@ footer{padding:25px 0 45px;display:flex;justify-content:space-between;font-famil
     </div>
   </div>
 </section>
- 
+
 </main>
- 
+
 <div class="container">
   <footer>
     <span>© 2026 Montserrat Balleza</span>
     <span>DATA · BEAUTY · LUXURY</span>
   </footer>
 </div>
- 
+
 <script>
 // Scroll reveal
 var revealObserver = new IntersectionObserver(function (entries) {
@@ -387,14 +387,13 @@ var revealObserver = new IntersectionObserver(function (entries) {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll(".reveal").forEach(function (el) { revealObserver.observe(el); });
- 
+
 // Subtle parallax on the pinstripe backdrop
 var backdrop = document.querySelector(".city");
 window.addEventListener("scroll", function () {
   backdrop.style.transform = "translateY(" + window.scrollY * 0.04 + "px)";
 });
 </script>
- 
+
 </body>
 </html>
- 
